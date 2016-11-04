@@ -54,9 +54,13 @@ h1, h2 {
 	font-size: 30px;
 }
 
+.time-remaining {
+	color: #4682B4;
+}
+
 .answer-choices {
 	font-family: 'Patrick Hand', cursive;
-	font-size: 25px;
+	font-size: 22px;
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
@@ -76,5 +80,14 @@ h1, h2 {
 
 .gif {
 	height: 150px;
+}
+
+.restart {
+	background: black;
+	color: white;
+	height: 60px;
+	font-size: 20px;
+	width: 140px;
+	font-family: 'Cabin Sketch', cursive;
 }
 
