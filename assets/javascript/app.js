@@ -3,6 +3,20 @@ $(document).ready(function(){
 //questions array
 	var questions = [
 		{
+			question: 'Who does Kelly date first from the office?',
+			answerChoices: ['Ryan', 'Roy', 'Daryl', 'Andy'],
+			correctAnswer: 'Ryan',
+			correctAnswerId: 0,
+			image: "<img src='assets/images/ketchup.gif' class='gif' alt='Ryan'>"
+		},
+		{
+			question: 'What does Pam use to make the "medals" for the office olympics medal ceremony?',
+			answerChoices: ['Printer Paper', 'Yogurt Lids', 'Post-Its', 'Plastic Cups'],
+			correctAnswer: 'Yogurt Lids',
+			correctAnswerId: 1,
+			image: "<img src='assets/images/yogurt.gif' class='gif' alt='Yogurt Lids'>"
+		},
+		{
 			question: 'Besides Jim, who is the only transfer from Stamford still working at Scranton by the end of the show?',
 			answerChoices: ['Dwight', 'Karen', 'Ryan', 'Andy'],
 			correctAnswer: 'Andy',
@@ -24,6 +38,13 @@ $(document).ready(function(){
 			image: "<img src='assets/images/stanley.gif' class='gif' alt='Pretzels'>"
 		},
 		{
+			question: 'What is the first prank viewers see Jim pull on Dwight?',
+			answerChoices: ['Relocating his desk to the bathroom', 'Adding 5 blank keys to his key ring', 'Convincing him a Thursday was a Friday', 'Encasing his stapler in Jell-O'],
+			correctAnswer: 'Encasing his stapler in Jell-O',
+			correctAnswerId: 3,
+			image: "<img src='assets/images/jello.gif' class='gif' alt='Jell-O'>"
+		},
+		{
 			question: 'When Michael leaves Dunder Mifflin to create the Michael Scott Paper Company, which 2 employees from the office go with him?',
 			answerChoices: ['Jim & Dwight', 'Pam & Ryan', 'Andy & Phyllis', 'Pam & Andy'],
 			correctAnswer: 'Pam & Ryan',
@@ -31,8 +52,8 @@ $(document).ready(function(){
 			image: "<img src='assets/images/mspc.gif' class='gif' alt='Pam & Ryan'>"
 		},
 		{
-			question: 'On Casual Friday, Kevin brings and proceeds to spill what food item on the floor?',
-			answerChoices: ['Chili', 'Pizza', 'M&Ms', 'Macaroni \'n Cheese'],
+			question: 'Kevin spends all night cooking what food that, the next day, he drops all over the floor of the office?',
+			answerChoices: ['Chili', 'Cookies', 'M&Ms', 'Macaroni \'n Cheese'],
 			correctAnswer: 'Chili',
 			correctAnswerId: 0,
 			image: "<img src='assets/images/kevinchili.gif' class='gif' alt='Chili'>"
@@ -50,13 +71,6 @@ $(document).ready(function(){
 			correctAnswer: 'Parkour',
 			correctAnswerId: 2,
 			image: "<img src='assets/images/parkour.gif' class='gif' alt='Parkour'>"
-		},
-		{
-			question: 'What is the first prank viewers see Jim pull on Dwight?',
-			answerChoices: ['Relocating his desk to the bathroom', 'Adding 5 blank keys to his key ring', 'Convincing him a Thursday was a Friday', 'Encasing his stapler in Jell-O'],
-			correctAnswer: 'Encasing his stapler in Jell-O',
-			correctAnswerId: 3,
-			image: "<img src='assets/images/jello.gif' class='gif' alt='Jell-O'>"
 		},
 		{
 			question: 'What 2 characters plan Kelly\'s Missed Birthday Party?',
@@ -115,20 +129,6 @@ $(document).ready(function(){
 			image: "<img src='assets/images/pb.gif' class='gif' alt='Puts peanut butter in his hair'>"
 		}, 
 		{
-			question: 'Who does Kelly date first from the office?',
-			answerChoices: ['Ryan', 'Roy', 'Daryl', 'Andy'],
-			correctAnswer: 'Ryan',
-			correctAnswerId: 0,
-			image: "<img src='assets/images/ketchup.gif' class='gif' alt='Ryan'>"
-		},
-		{
-			question: 'What does Pam use to make the "medals" for the office olympics medal ceremony?',
-			answerChoices: ['Printer Paper', 'Yogurt Lids', 'Post-Its', 'Plastic Cups'],
-			correctAnswer: 'Yogurt Lids',
-			correctAnswerId: 1,
-			image: "<img src='assets/images/yogurt.gif' class='gif' alt='Yogurt Lids'>"
-		},
-		{
 			question: 'When Stanley refuses to go on a sales call because elevator is broken, Dwight shoots him with bull tranquilizers, and then does what?',
 			answerChoices: ['Goes by himself', 'Slides him downstairs in bubble wrap', 'Carries him down the stairs', 'Steals his stuff to teach him a lesson'],
 			correctAnswer: 'Slides him downstairs in bubble wrap',
@@ -150,6 +150,8 @@ $(document).ready(function(){
 	var timeLeft = true;
 	var index = 0;
 	var correctQs = 0;
+	var incorrectQs = 0;
+	var unansweredQs = 0;
 
 //timer functionality
 
@@ -183,6 +185,7 @@ $(document).ready(function(){
 			$('.question').html("Out of Time!");
 			$('.answer-choices').html("The correct answer was: " + questions[index].correctAnswer);
 			$('.gifs-div').html(questions[index].image);
+			unansweredQs++;
 		}
 	};
 
@@ -205,12 +208,12 @@ $(document).ready(function(){
 				$('.question').html('Nope!');
 				$('.answer-choices').html('The correct answer was: ' + questions[index].correctAnswer);
 				$('.gifs-div').html(questions[index].image);
+				incorrectQs++;
 			} else {
 				$('.question').html('Correct!');
 				$('.answer-choices').html('The answer was: ' + questions[index].correctAnswer);
 				$('.gifs-div').html(questions[index].image);
 				correctQs++;
-				console.log('Correct: ' + correctQs);
 			} 
 			displayNextQuestion();
 		});
@@ -234,8 +237,8 @@ $(document).ready(function(){
 	//function used to end the game
 	function endGame() {
 		$('.time-remaining').html(' ');
-		$('.question').html('Nice Job!');
-		$('.answer-choices').html('You got ' + correctQs + ' out of 20 questions correct!');
+		$('.question').html('All done, here\'s how you did!');
+		$('.answer-choices').html('Correct Answers: ' + correctQs + '<br>' + 'Incorrect Answers: ' + incorrectQs + '<br>' + 'Unanswered Questions: ' + unansweredQs);
 		$('.gifs-div').html("<img src='assets/images/highfive.gif' class='gif' alt='High Five'>");
 	};
 
@@ -251,6 +254,8 @@ function restart() {
 		$('.restart').hide();
 		timeLeft = true;
 		correctQs = 0;
+		incorrectQs = 0;
+		unansweredQs = 0;
 		index = 0;
 		timeRemaining = 30;
 		$('.answer-choices').html(' ');
